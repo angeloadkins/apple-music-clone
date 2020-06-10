@@ -61,6 +61,17 @@ class ListViewController: UIViewController {
         let so_what_fuss = MusicAlbums(albumTitle: "So What The Fuss", artist: "Stevie Wonder", year: "2005", label: "Motown", albumCover: UIImage(imageLiteralResourceName: "sowhatthefuss"), tracks: fearInocolumSongs)
         albums.append(so_what_fuss)
         
+        let sick_boy = MusicAlbums(albumTitle: "Sick Boy", artist: "The Chainsmokers", year: "2018", label: "Disruptor", albumCover: UIImage(imageLiteralResourceName: "sick_boy"), tracks: fearInocolumSongs)
+        albums.append(sick_boy)
+        
+        let the_far_day = MusicAlbums(albumTitle: "The Far Day", artist: "The Chainsmokers", year: "2017", label: "4AD", albumCover: UIImage(imageLiteralResourceName: "the_far_field"), tracks: fearInocolumSongs)
+        albums.append(the_far_day)
+        
+        let american_idiot = MusicAlbums(albumTitle: "American Idiot", artist: "Green Day", year: "2004", label: "Reprise", albumCover: UIImage(imageLiteralResourceName: "american_idiot"), tracks: fearInocolumSongs)
+        albums.append(american_idiot)
+        
+        let meteora = MusicAlbums(albumTitle: "Meteora", artist: "Linkin Park", year: "2003", label: "Warner Bros", albumCover: UIImage(imageLiteralResourceName: "meteora"), tracks: fearInocolumSongs)
+        albums.append(meteora)
         
         tableView.dataSource = self
         tableView.delegate = self
