@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		39B7C9B024902FB4000AF090 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7C9AF24902FB4000AF090 /* NewViewController.swift */; };
-		39B7C9D42490AD4D000AF090 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7C9D32490AD4D000AF090 /* EditViewController.swift */; };
 		39C34D4E248F1CEA00DFBBAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C34D4D248F1CEA00DFBBAE /* AppDelegate.swift */; };
 		39C34D50248F1CEA00DFBBAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C34D4F248F1CEA00DFBBAE /* SceneDelegate.swift */; };
 		39C34D52248F1CEA00DFBBAE /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C34D51248F1CEA00DFBBAE /* ListViewController.swift */; };
@@ -22,7 +21,6 @@
 
 /* Begin PBXFileReference section */
 		39B7C9AF24902FB4000AF090 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
-		39B7C9D32490AD4D000AF090 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		39C34D4A248F1CE900DFBBAE /* adkinsMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = adkinsMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C34D4D248F1CEA00DFBBAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C34D4F248F1CEA00DFBBAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 				39C34D65248F34A900DFBBAE /* AlbumViewController.swift */,
 				39C34D51248F1CEA00DFBBAE /* ListViewController.swift */,
 				39B7C9AF24902FB4000AF090 /* NewViewController.swift */,
-				39B7C9D32490AD4D000AF090 /* EditViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -177,7 +174,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39B7C9D42490AD4D000AF090 /* EditViewController.swift in Sources */,
 				39C34D52248F1CEA00DFBBAE /* ListViewController.swift in Sources */,
 				39C34D66248F34A900DFBBAE /* AlbumViewController.swift in Sources */,
 				39B7C9B024902FB4000AF090 /* NewViewController.swift in Sources */,

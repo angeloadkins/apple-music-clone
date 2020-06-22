@@ -36,5 +36,6 @@ class NewViewController: UIViewController {
         albums.append(newAlbum)
         self.performSegue(withIdentifier: "backToHome", sender: self)
     }
+    
 }
 

@@ -18,29 +18,54 @@ class AlbumViewController: UIViewController {
     var recordingLabelName: String?
     var indexNumber: Int?
     
-    @IBOutlet weak var albumTitle: UILabel!
+    
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var trackTableView: UITableView!
-    @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet weak var yearLabel: UILabel!
-    @IBOutlet weak var recordingLabelLabel: UILabel!
+    
+    
+    @IBOutlet weak var albumTitleTextField: UITextField!
+    @IBOutlet weak var artistTextField: UITextField!
+    @IBOutlet weak var releaseYearTextField: UITextField!
+    
+    @IBOutlet weak var recordLabelTextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        albumTitle.text = albumName
+        
+        albumTitleTextField.text = albumName
+        artistTextField.text = artistName
+        releaseYearTextField.text = yearName
+        recordLabelTextField.text = recordingLabelName
         albumImage.image = albumCover
         trackTableView.dataSource = self
-        artistLabel.text = artistName
-        yearLabel.text = yearName
-        recordingLabelLabel.text = recordingLabelName
+    
+    }
+    
+    @IBAction func saveButton(_ sender: UIBarButtonItem) {
+        
+        let indexInt = indexNumber!
+        let newAlbumName = albumTitleTextField.text
+        let newArtistName = artistTextField.text
+        let newYear = releaseYearTextField.text
+        let newRecordLabel = recordLabelTextField.text
+        albums[indexInt].albumTitle = newAlbumName
+        albums[indexInt].artist = newArtistName
+        albums[indexInt].year = newYear
+        albums[indexInt].label = newRecordLabel
+        
+        self.performSegue(withIdentifier: "unWindEdit", sender: self)
     }
     
     
-    @IBAction func editButton(_ sender: UIBarButtonItem) {
-        self.performSegue(withIdentifier: "goToEdit", sender: self)
+    @IBAction func tapgesturealbums(_ sender: UITapGestureRecognizer) {
+        albumTitleTextField.resignFirstResponder()
+        artistTextField.resignFirstResponder()
+        releaseYearTextField.resignFirstResponder()
+        recordLabelTextField.resignFirstResponder()
     }
+    
+   
     
 }
 
