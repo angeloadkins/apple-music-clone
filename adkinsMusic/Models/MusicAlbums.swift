@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import os.log
 
-struct MusicAlbums {
-    
+class MusicAlbums: NSObject, NSCoding {
     
     static let cellIdentifier = "ReusableCell"
     
@@ -20,6 +20,17 @@ struct MusicAlbums {
     var albumCover: UIImage?
     var tracks: [Tracks]?
     
+    struct PropertyKey {
+        
+        static let albumTitle = "albumTitle"
+        static let artist = "artist"
+        static let year = "year"
+        static let label = "label"
+        static let albumCover = "albumCover"
+        static let tracks = "tracks"
+        
+    }
+    
     init(albumTitle: String, artist: String, year: String, label: String, albumCover: UIImage, tracks: [Tracks]){
         
         self.albumTitle = albumTitle
@@ -28,6 +39,37 @@ struct MusicAlbums {
         self.label = label
         self.albumCover = albumCover
         self.tracks = tracks
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(albumTitle, forKey: PropertyKey.albumTitle)
+        aCoder.encode(artist, forKey: PropertyKey.artist)
+        aCoder.encode(year, forKey: PropertyKey.year)
+        aCoder.encode(label, forKey: PropertyKey.label)
+        aCoder.encode(albumCover, forKey: PropertyKey.albumCover)
+        aCoder.encode(tracks, forKey: PropertyKey.tracks)
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let albumTitle = aDecoder.decodeObject(forKey: PropertyKey.albumTitle) as? String
+            else {
+                os_log("Unable to decode the name for an Album object.", log: OSLog.default, type: .debug)
+        return nil
+        }
+        
+        //Because the photo is optional, just use conditional cast
+        let albumCover = aDecoder.decodeObject(forKey: PropertyKey.albumCover) as? UIImage
+        
+        guard let artist = aDecoder.decodeObject(forKey: PropertyKey.artist) as? String else { return nil }
+        
+        guard let year = aDecoder.decodeObject(forKey: PropertyKey.year) as? String else { return nil }
+        
+        guard let label = aDecoder.decodeObject(forKey: PropertyKey.label) as? String else { return nil }
+        
+        guard let tracks = aDecoder.decodeObject(forKey: PropertyKey.tracks) as? [Tracks] else { return nil }
+        
+        //Must call desginated initializer
+        self.init(albumTitle: albumTitle, artist: artist, year: year, label: label, albumCover: albumCover!, tracks: tracks)
     }
 }
 
