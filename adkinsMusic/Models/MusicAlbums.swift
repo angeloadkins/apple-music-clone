@@ -31,6 +31,9 @@ class MusicAlbums: NSObject, NSCoding {
         
     }
     
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("albums")
+    
     init(albumTitle: String, artist: String, year: String, label: String, albumCover: UIImage, tracks: [Tracks]){
         
         self.albumTitle = albumTitle

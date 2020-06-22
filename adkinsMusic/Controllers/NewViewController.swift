@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class NewViewController: UIViewController {
 
@@ -37,7 +38,18 @@ class NewViewController: UIViewController {
         self.performSegue(withIdentifier: "backToHome", sender: self)
     }
     
+    private func saveAlbums() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(albums, toFile: MusicAlbums.ArchiveURL.path)
+        
+        if isSuccessfulSave {
+            os_log("Albums successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save albums...", log: OSLog.default, type: .error)
+        }
+    }
     
-    
+    private func loadAlbums() -> [MusicAlbums]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: MusicAlbums.ArchiveURL.path) as? [MusicAlbums]
+    }
 }
 
