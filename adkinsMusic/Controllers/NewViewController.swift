@@ -35,6 +35,7 @@ class NewViewController: UIViewController {
         let recordLabelInput = recordLabelText.text
         let newAlbum = MusicAlbums(albumTitle: albumInput!, artist: artistInput!, year: yearInput!, label: recordLabelInput!, albumCover: UIImage(imageLiteralResourceName: "tool"), tracks: fearInocolumSongs)
         albums.append(newAlbum)
+        saveAlbums()
         self.performSegue(withIdentifier: "backToHome", sender: self)
     }
     

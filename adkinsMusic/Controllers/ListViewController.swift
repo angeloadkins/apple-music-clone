@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 
 
@@ -30,7 +31,13 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadInitialData()
+        if let savedAlbums = loadAlbums() {
+            albums += savedAlbums
+        }
+        else {
+            // Load the sample data.
+            loadInitialData()
+        }
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -63,6 +70,20 @@ class ListViewController: UIViewController {
         
         albums.append(meteora)
     }
+    
+    private func saveAlbums() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(albums, toFile: MusicAlbums.ArchiveURL.path)
+        
+        if isSuccessfulSave {
+            os_log("Albums successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save albums...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadAlbums() -> [MusicAlbums]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: MusicAlbums.ArchiveURL.path) as? [MusicAlbums]
+    }
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -94,6 +115,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             albums.remove(at: indexPath.row)
             tableView.beginUpdates()
+            saveAlbums()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }

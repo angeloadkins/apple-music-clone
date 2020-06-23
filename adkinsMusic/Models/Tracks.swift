@@ -7,19 +7,57 @@
 //
 
 import Foundation
+import os.log
 
-struct Tracks {
+class Tracks: NSObject, NSCoding {
+    
+    
     
     var song: String?
     var length: String?
     var composer: String?
     var trackNumber: Int?
     
+    struct PropertyKey {
+        
+        static let song = "song"
+        static let length = "length"
+        static let composer = "composer"
+        static let trackNumber = "trackNumber"
+    }
+    
+    
     init(trackNumber: Int, song: String, length: String, composer: String ) {
         self.song = song
         self.length = length
         self.composer = composer
         self.trackNumber = trackNumber
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(song, forKey: PropertyKey.song)
+        aCoder.encode(length, forKey: PropertyKey.length)
+        aCoder.encode(composer, forKey: PropertyKey.composer)
+        aCoder.encode(trackNumber, forKey: PropertyKey.trackNumber)
+       
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let song = aDecoder.decodeObject(forKey: PropertyKey.song) as? String
+            else {
+                os_log("Unable to decode the name for an Album object.", log: OSLog.default, type: .debug)
+        return nil
+        }
+        
+        //Because the photo is optional, just use conditional cast
+        
+        guard let length = aDecoder.decodeObject(forKey: PropertyKey.length) as? String else { return nil }
+        
+        guard let composer = aDecoder.decodeObject(forKey: PropertyKey.composer) as? String else { return nil }
+                
+        guard let trackNumber = aDecoder.decodeObject(forKey: PropertyKey.trackNumber) as? Int else { return nil }
+        
+        self.init(trackNumber:trackNumber, song: song, length: length, composer: composer)
     }
 }
 

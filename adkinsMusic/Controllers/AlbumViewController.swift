@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log 
 
 class AlbumViewController: UIViewController {
 
@@ -53,6 +54,7 @@ class AlbumViewController: UIViewController {
         albums[indexInt].artist = newArtistName
         albums[indexInt].year = newYear
         albums[indexInt].label = newRecordLabel
+        saveAlbums()
         
         self.performSegue(withIdentifier: "unWindEdit", sender: self)
     }
@@ -63,6 +65,20 @@ class AlbumViewController: UIViewController {
         artistTextField.resignFirstResponder()
         releaseYearTextField.resignFirstResponder()
         recordLabelTextField.resignFirstResponder()
+    }
+    
+    private func saveAlbums() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(albums, toFile: MusicAlbums.ArchiveURL.path)
+        
+        if isSuccessfulSave {
+            os_log("Albums successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save albums...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadAlbums() -> [MusicAlbums]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: MusicAlbums.ArchiveURL.path) as? [MusicAlbums]
     }
     
    

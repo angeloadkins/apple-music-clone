@@ -71,7 +71,6 @@ class MusicAlbums: NSObject, NSCoding {
         
         guard let tracks = aDecoder.decodeObject(forKey: PropertyKey.tracks) as? [Tracks] else { return nil }
         
-        //Must call desginated initializer
         self.init(albumTitle: albumTitle, artist: artist, year: year, label: label, albumCover: albumCover!, tracks: tracks)
     }
 }
